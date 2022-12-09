@@ -2,7 +2,6 @@ package pl.edu.wszib.store.paints.core;
 
 import pl.edu.wszib.store.paints.database.ProductsDB;
 import pl.edu.wszib.store.paints.gui.GUI;
-import pl.edu.wszib.store.paints.model.Product;
 import pl.edu.wszib.store.paints.model.User;
 
 public class Core {
@@ -52,15 +51,17 @@ public class Core {
                             this.gui.listProduct();
                             break;
                         case "2": // Buy product
-                            Product order = new Product();
-                            order.setOrder(this.gui.readItemId());
-                            order.setQuantity(this.gui.readQuantity());
-                            //System.out.println(this.authenticator.checkProduct(order));
+                            System.out.println(
+                                    this.authenticator.checkProduct(
+                                            this.gui.readItemId(),
+                                            this.gui.readQuantity()
+                                    ));
                             break;
                         case "3": // Increase product quantity
                             System.out.println(
-                                    this.authenticator.validateQuantity(
-                                        this.gui.readItemId(),this.gui.readQuantity()));
+                                    this.authenticator.magazineManager(
+                                        this.gui.readItemId(),this.gui.readQuantity()
+                                    ));
                             break;
                         case "4": // Give user admin permission
                             System.out.println(
@@ -98,43 +99,6 @@ public class Core {
                 }
             } else System.out.println("Nieznana rola! Nie wybrano panelu.");
         }
-
-
-        /*
-        this.gui.showRentResult(this.vehicleDB.rentVehicle(this.gui.readPlate()));
-
-        while(!isRunning && counter < 3) {
-            this.authenticator.authenticate(this.gui.readLoginAndPassword());
-            isRunning = this.authenticator.getLoggedUser() != null;
-            if(!isRunning) {
-                System.out.println("Not authorized !!");
-            }
-            counter++;
-        }
-
-        while(isRunning) {
-            switch(this.gui.showMenu()) {
-                case "1":
-                    this.gui.listCars();
-                    break;
-                case "2":
-                    this.gui.showRentResult(this.vehicleDB.rentVehicle(this.gui.readPlate()));
-                    break;
-                case "3":
-                    isRunning = false;
-                    break;
-                case "4":
-                    if(this.authenticator.getLoggedUser() != null &&
-                            this.authenticator.getLoggedUser().getRole() == User.Role.ADMIN) {
-                        this.vehicleDB.addVehicle(this.gui.readNewVehicleData());
-                        break;
-                    }
-                default:
-                    System.out.println("Wrong choose !!");
-                    break;
-            }
-        }
-         */
     }
 
     public static Core getInstance() {

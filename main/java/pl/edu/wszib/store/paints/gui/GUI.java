@@ -52,13 +52,9 @@ public class GUI {
     }
 
     public int readQuantity() {
-        System.out.println("Ilość przedmiotu");
+        System.out.println("Liczba sztuk:");
         return scanner.nextInt();
     }
-
-
-
-
 
     public void listProduct() {
         System.out.format("%-5s %-5s %30s %10.2s %10s %10s %10s\n", "ID", "FIRMA", "NAZWA", "CENA", "ILOŚĆ", "MAGAZYN", "KATEGORIA");

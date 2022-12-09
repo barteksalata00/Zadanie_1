@@ -3,8 +3,6 @@ package pl.edu.wszib.store.paints.core;
 import org.apache.commons.codec.digest.DigestUtils;
 import pl.edu.wszib.store.paints.database.ProductsDB;
 import pl.edu.wszib.store.paints.database.UserDB;
-import pl.edu.wszib.store.paints.gui.GUI;
-import pl.edu.wszib.store.paints.model.Product;
 import pl.edu.wszib.store.paints.model.User;
 
 public class Authenticator {
@@ -36,12 +34,23 @@ public class Authenticator {
         else return false;
     }
 
-    public String checkProduct(int order) {
-        if (productsDB.findById(order)) {
-            return "Nie udało się znaleźć produktu.";
+    public String checkProduct(int orderedId, int orderedQuantity) {
+        if (productsDB.findById(orderedId)) {
+            if (orderedQuantity >= 1) {
+                if (productsDB.getProduct(orderedId).getQuantity() - orderedQuantity >= 0) {
+                    return String.format("Zakup przeszedł pomyślny. Do zapłaty: %2.2f",
+                            productsDB.buyProduct(orderedId, orderedQuantity));
+                }
+                else {
+                    return "Liczba sztuk przekracza liczbe sztuk posiadanych w magazynie przedmiotu (zmniejsz liczbe sztuk).";
+                }
+            }
+            else {
+                return "Liczba sztuk musi być minimum 1";
+            }
         }
         else {
-            return "Znaleziono";
+            return "Nie znaleziono przedmiotu";
         }
     }
 
@@ -64,27 +73,17 @@ public class Authenticator {
         return result;
     }
 
-    public String validateQuantity(int givenId, int addValue) {
+    public String magazineManager(int givenId, int addValue) {
         if (productsDB.findById(givenId))
         {
-            int fetchedQuantity = productsDB.getProduct(givenId).getQuantity();
-            if (addValue >= 0)
+            if (addValue >= 1)
             {
-                if (addValue <= fetchedQuantity)
-                {
-                    productsDB.getProduct(givenId).addQuantity(addValue);
-                    return "Pomyślnie zakończono";
-                }
-                else
-                {
-                    return String.format(
-                            "Wprowadzona liczba nie może być większa niż %d",
-                            fetchedQuantity);
-                }
+                productsDB.getProduct(givenId).addQuantity(addValue);
+                return "Pomyślnie zakończono";
             }
             else
             {
-                return "Liczba nie może być mniejsza niż zero";
+                return "Liczba nie może być mniejsza niż 1";
             }
         }
         else

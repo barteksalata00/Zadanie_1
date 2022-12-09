@@ -34,6 +34,12 @@ public class ProductsDB {
         return null;
     }
 
+    public double buyProduct(int orderedId, int orderedQuantity) {
+        int newValueQuantity = this.getProduct(orderedId).getQuantity() - orderedQuantity;
+        this.getProduct(orderedId).setQuantity(newValueQuantity);
+        return this.getProduct(orderedId).getPrice() * orderedQuantity;
+    }
+
 
 
     public Product[] getProducts() {
