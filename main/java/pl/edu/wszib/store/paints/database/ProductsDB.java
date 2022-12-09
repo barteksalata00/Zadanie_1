@@ -1,9 +1,6 @@
 package pl.edu.wszib.store.paints.database;
 
 import pl.edu.wszib.store.paints.model.Product;
-
-
-
 public class ProductsDB {
     private Product[] products = new Product[5];
     private static final ProductsDB instance = new ProductsDB();
@@ -39,8 +36,6 @@ public class ProductsDB {
         this.getProduct(orderedId).setQuantity(newValueQuantity);
         return this.getProduct(orderedId).getPrice() * orderedQuantity;
     }
-
-
 
     public Product[] getProducts() {
         return products;

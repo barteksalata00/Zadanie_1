@@ -42,8 +42,6 @@ public class UserDB {
         return "2";
     }
 
-
-
     public static UserDB getInstance() {
         return instance;
     }

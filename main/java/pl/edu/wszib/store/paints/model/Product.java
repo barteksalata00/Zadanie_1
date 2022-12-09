@@ -9,8 +9,6 @@ public class Product {
     private int quantity;
     private boolean available;
 
-    private int order; // equal to id
-
     public Product() {
     }
 
@@ -23,33 +21,22 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.available = available;
-        this.order = 0;
     }
 
     public int getId() { return this.id; }
-
     public String getCompany() { return this.company; }
     public void setCompany(String company) { this.company = company; }
-
     public String getName() { return this.name; }
     public void setName(String name) { this.name = name; }
-
     public Categories getCategory() { return this.category; }
     public void setCategory(Categories category) { this.category = category; }
-
     public double getPrice() { return this.price; }
     public void setPrice(double price) { this.price = price; }
-
     public int getQuantity() { return this.quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void addQuantity(int value) { this.quantity += value; }
-
-
     public boolean getAvailable() { return this.available; }
     public void setAvailable(boolean available) { this.available = available; }
-
-    public int getOrder() { return this.order; }
-    public void setOrder(int order) { this.order = order; }
 
     @Override
     public String toString() {

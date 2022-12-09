@@ -17,7 +17,6 @@ public class Authenticator {
     }
     public void authenticate(User user) {
         User userFromDB = this.userDB.findByLogin(user.getLogin());
-        //System.out.println(DigestUtils.md5Hex(user.getPassword() + this.seed));
         if(userFromDB != null &&
                 userFromDB.getPassword().equals(
                         DigestUtils.md5Hex(user.getPassword() + this.seed))) {
@@ -35,9 +34,12 @@ public class Authenticator {
     }
 
     public String checkProduct(int orderedId, int orderedQuantity) {
-        if (productsDB.findById(orderedId)) {
-            if (orderedQuantity >= 1) {
-                if (productsDB.getProduct(orderedId).getQuantity() - orderedQuantity >= 0) {
+        if (productsDB.findById(orderedId))
+        {
+            if (orderedQuantity >= 1)
+            {
+                if (productsDB.getProduct(orderedId).getQuantity() - orderedQuantity >= 0)
+                {
                     return String.format("Zakup przeszedł pomyślny. Do zapłaty: %2.2f",
                             productsDB.buyProduct(orderedId, orderedQuantity));
                 }

@@ -1,15 +1,11 @@
 package pl.edu.wszib.store.paints.gui;
 
-import pl.edu.wszib.store.paints.core.Authenticator;
 import pl.edu.wszib.store.paints.database.ProductsDB;
 import pl.edu.wszib.store.paints.model.*;
-
-
 import java.util.Scanner;
 
 public class GUI {
     private final Scanner scanner = new Scanner(System.in);
-    final Authenticator authenticator = Authenticator.getInstance();
     final ProductsDB productsDB = ProductsDB.getInstance();
     private static final GUI instance = new GUI();
 
@@ -27,8 +23,8 @@ public class GUI {
         System.out.println("\n=== Panel Adminowy ===");
         System.out.println("1. Lista produktow");
         System.out.println("2. Kup Produkt");
-        System.out.println("3. Zmien liczbe produktu");
-        System.out.println("4. Nadaj uprawnienia userowi");
+        System.out.println("3. Zwiększ liczbe sztuk produktu");
+        System.out.println("4. Nadaj uprawnienia administratora userowi");
         System.out.println("5. Wyloguj");
         return scanner.nextLine();
     }
@@ -46,7 +42,7 @@ public class GUI {
         return scanner.nextLine();
     }
 
-    public int readItemId() {
+    public int readId() {
         System.out.println("ID przedmiotu:");
         return scanner.nextInt();
     }
@@ -69,14 +65,6 @@ public class GUI {
         return this.scanner.nextLine();
     }
 
-    public void showRentResult(boolean result) {
-        if(result) {
-            System.out.println("Rent successful");
-        } else {
-            System.out.println("Plate does not exist or car is already rent");
-        }
-    }
-
     public User readLoginAndPassword() {
         User user = new User();
         System.out.println("Login:");
@@ -85,9 +73,6 @@ public class GUI {
         user.setPassword(this.scanner.nextLine());
         return user;
     }
-
-
-
     public static GUI getInstance() {
         return instance;
     }
